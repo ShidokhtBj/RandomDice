@@ -4,14 +4,27 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="./public/image/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./public/style/mainCompile.css" />
+    <link rel="stylesheet" href="./public/style/compile.css" />
     <title>Random Dice</title>
   </head>
   <body>
     <div id="main">
+      <div id="cover">
+        <section>
+          <div class="loading" id="loadingText">
+            <span>L</span>
+            <span>O</span>
+            <span>A</span>
+            <span>D</span>
+            <span>I</span>
+            <span>N</span>
+            <span>G</span>
+          </div>
+        </section>
+      </div>
       <div class="table">
       </div>
-      <div class="dice" id="dice">
+     <!-- <div class="dice" id="dice">
         <ol class="die-list even-roll" data-roll="1" id="die-1">
           <li class="die-item" data-side="1">
             <span class="dot"></span>
@@ -47,12 +60,49 @@
             <span class="dot"></span>
           </li>
         </ol>
+      </div>-->
+      <div class="dice-container" id="dice-container">
+        <div class="dice" id="dice">
+          <div class="face front"><span class="dot"></span></div>
+          <div class="face back">
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="face left">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="face right">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="face top">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="face bottom">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
       </div>
-      <button type="button" id="roll-button" class="Btn_Dice">Roll Dice
+      <button type="button" id="NewGame" class="Btn_New">New Game
       </button>
-      <button type="button" id="get-button" class="Btn_Get">Hold
+      <button type="button" id="rollDiceBtn" class="Btn_Dice">Roll Dice
       </button>
-      <button class="cta" id="start">
+      <button type="button" id="Hold-button" class="Btn_Hold">Hold
+      </button>
+      <button id="start">
         <span>Start</span>
         <span>
           <svg width="40px" height="43px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -74,15 +124,15 @@
       <div id="first_player_field">
         <div id="player1">
           <h2>Player 1</h2>
-          <span>Score: <span id="ScorePlayer_1">0</span> </span>
-          <span>Hold: </span>
+          <span>Score: <span id="sumOfRolls_1">0</span> </span>
+          <span>Hold Score: <span id="sumOfHoldScore_1">0</span> </span>
          </div>
       </div>
      <div id="second_player_field">
       <div id="player2">
         <h2>Player 2</h2>
-        <span>Score: <span id="ScorePlayer_2">0</span></span>
-        <span>Hold: </span>
+        <span>Score: <span id="sumOfRolls_2">0</span></span>
+        <span>Hold Score: <span id="sumOfHoldScore_2">0</span></span>
        </div>
       </div>
      </div>
