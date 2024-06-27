@@ -53,19 +53,19 @@ btn_dice.addEventListener("click", () => {
   let rotateY = 0;
 
   if (randomPlayer === 1) {
-    player2.style.color = "#2b2b2b";
-    player1.style.color = "#fff";
-    second_player_field.style.background = "none";
+    first_player_field.classList.add("first_field_bg_display");
+    first_player_field.classList.remove("first_field_bg_hidden");
+    second_player_field.classList.remove("second_field_bg_display");
+    second_player_field.classList.add("second_field_bg_hidden");
     switch (randomNumber) {
       case 1:
         rotateX = 0;
         rotateY = 0;
         //  alert("player1 loses trun");
-        player2.style.color = "#fff";
-        first_player_field.style.background = "none";
-        second_player_field.style.background = "url(../image/bg_2.png)";
-        second_player_field.style.backgroundSize = "cover";
-        player1.style.color = "#2b2b2b";
+        first_player_field.classList.remove("first_field_bg_display");
+        first_player_field.classList.add("first_field_bg_hidden");
+        second_player_field.classList.add("second_field_bg_display");
+        second_player_field.classList.remove("second_field_bg_hidden");
         document.getElementById("sumOfRolls_1").textContent = 0;
         sumOfRolls_1 = 0;
         randomPlayer = 2;
@@ -99,19 +99,20 @@ btn_dice.addEventListener("click", () => {
 
     document.getElementById("sumOfRolls_1").textContent = sumOfRolls_1;
   } else if (randomPlayer === 2) {
-    player1.style.color = "#2b2b2b";
-    player2.style.color = "#fff";
-    first_player_field.style.background = "none";
+    first_player_field.classList.remove("first_field_bg_display");
+    first_player_field.classList.add("first_field_bg_hidden");
+    second_player_field.classList.add("second_field_bg_display");
+    second_player_field.classList.remove("second_field_bg_hidden");
     switch (randomNumber) {
       case 1:
         rotateX = 0;
         rotateY = 0;
         // alert("player2 loses trun");
-        player1.style.color = "#fff";
-        second_player_field.style.backgroundImage = "none";
-        first_player_field.style.background = "url(../image/bg_1.png)";
-        first_player_field.style.backgroundSize = "cover";
-        player2.style.color = "#2b2b2b";
+        first_player_field.classList.add("first_field_bg_display");
+        first_player_field.classList.remove("first_field_bg_hidden");
+        second_player_field.classList.remove("second_field_bg_display");
+        second_player_field.classList.add("second_field_bg_hidden");
+
         document.getElementById("sumOfRolls_2").textContent = 0;
         sumOfRolls_2 = 0;
         randomPlayer = 1;
@@ -162,14 +163,13 @@ btn_Hold.addEventListener("click", function () {
     sumOfRolls_1 = 0;
     sumOfRoll_1.textContent = sumOfRolls_1;
     //  alert("player1 loses trun");
-    player2.style.color = "#fff";
-    first_player_field.style.background = "none";
-    second_player_field.style.background = "url(../image/bg_2.png)";
-    second_player_field.style.backgroundSize = "cover";
-    player1.style.color = "#2b2b2b";
+    first_player_field.classList.remove("first_field_bg_display");
+    first_player_field.classList.add("first_field_bg_hidden");
+    second_player_field.classList.add("second_field_bg_display");
+    second_player_field.classList.remove("second_field_bg_hidden");
     randomPlayer = 2;
-    if (holdSum_1 >= 30){
-      alert("player 1 is winner")
+    if (holdSum_1 >= 30) {
+      alert("player 1 is winner");
     }
   } else if (randomPlayer === 2) {
     holdSum_2 = holdSum_2 + sumOfRolls_2;
@@ -178,14 +178,13 @@ btn_Hold.addEventListener("click", function () {
     sumOfRolls_2 = 0;
     sumOfRoll_2.textContent = sumOfRolls_2;
     // alert("player2 loses trun");
-    player1.style.color = "#fff";
-    second_player_field.style.backgroundImage = "none";
-    first_player_field.style.background = "url(../image/bg_1.png)";
-    first_player_field.style.backgroundSize = "cover";
-    player2.style.color = "#2b2b2b";
+    first_player_field.classList.add("first_field_bg_display");
+    first_player_field.classList.remove("first_field_bg_hidden");
+    second_player_field.classList.remove("second_field_bg_display");
+    second_player_field.classList.add("second_field_bg_hidden");
     randomPlayer = 1;
     if (holdSum_2 >= 30) {
-      alert("player 2 is winner")
+      alert("player 2 is winner");
     }
   }
 });
@@ -208,11 +207,10 @@ btn_New.addEventListener("click", function () {
     holdSum_1 = 0;
     sumOfHoldScore_2.textContent = 0;
     holdSum_2 = 0;
-    player2.style.color = "#fff";
-    first_player_field.style.background = "none";
-    second_player_field.style.background = "url(../image/bg_2.png)";
-    second_player_field.style.backgroundSize = "cover";
-    player1.style.color = "#2b2b2b";
+    first_player_field.classList.remove("first_field_bg_display");
+    first_player_field.classList.add("first_field_bg_hidden");
+    second_player_field.classList.add("second_field_bg_display");
+    second_player_field.classList.remove("second_field_bg_hidden");
     setTimeout(() => {
       cover.style.display = "none";
     }, 1000);

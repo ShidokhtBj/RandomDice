@@ -10,7 +10,6 @@ body {
   height: 100vh;
 }
 
-
 #main {
   background: url("../image/background.jpg") no-repeat center center fixed;
   width: 100vw;
@@ -54,7 +53,7 @@ body {
   }
 
   .dice-container {
-    Perspective: 1000px;
+    perspective: 1000px;
     z-index: 20;
     position: absolute;
     top: 10%;
@@ -63,32 +62,32 @@ body {
     opacity: 0;
     display: flex;
   }
-  
+
   .dice {
     z-index: 20;
-    Width: 100px;
-    Height: 100px;
-    Position: relative;
-    Transform-style: preserve-3d;
-    Transform: rotateX(0deg) rotateY(0deg);
-    Transition: transform 1s;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg);
+    transition: transform 1s;
   }
-  
+
   .face {
     z-index: 20;
-    Position: absolute;
-    Width: 100px;
-    Height: 100px;
-    Background-color: white;
-    Border: 1px solid #d0d0d0;
-    Display: flex;
-    Align-items: center;
-    Justify-content: center;
-    Flex-wrap: wrap;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: 1px solid #d0d0d0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     box-shadow: inset -0.35rem 0.35rem 0.75rem rgba(0, 0, 0, 0.3),
       inset 0.5rem -0.25rem 0.5rem rgba(0, 0, 0, 0.15);
   }
-  
+
   .dot {
     align-self: center;
     background-color: #676767;
@@ -100,37 +99,138 @@ body {
     width: 1.25rem;
     position: absolute;
   }
-  
-  .front { transform: rotateY(0deg) translateZ(50px); }
-  .back { transform: rotateY(180deg) translateZ(50px); }
-  .left { transform: rotateY(-90deg) translateZ(50px); }
-  .right { transform: rotateY(90deg) translateZ(50px); }
-  .top { transform: rotateX(90deg) translateZ(50px); }
-  .bottom { transform: rotateX(-90deg) translateZ(50px); }
-  
-  .face.front .dot { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-  .face.back .dot:nth-child(1) { position: absolute; top: 20%; left: 20%; }
-  .face.back .dot:nth-child(2) { position: absolute; bottom: 20%; right: 20%; }
-  .face.left .dot:nth-child(1) { position: absolute; top: 20%; left: 20%; }
-  .face.left .dot:nth-child(2) { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-  .face.left .dot:nth-child(3) { position: absolute; bottom: 20%; right: 20%; }
-  .face.right .dot:nth-child(1) { position: absolute; top: 20%; left: 20%; }
-  .face.right .dot:nth-child(2) { position: absolute; top: 20%; right: 20%; }
-  .face.right .dot:nth-child(3) { position: absolute; bottom: 20%; left: 20%; }
-  .face.right .dot:nth-child(4) { position: absolute; bottom: 20%; right: 20%; }
-  .face.top .dot:nth-child(1) { position: absolute; top: 20%; left: 20%; }
-  .face.top .dot:nth-child(2) { position: absolute; top: 20%; right: 20%; }
-  .face.top .dot:nth-child(3) { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-  .face.top .dot:nth-child(4) { position: absolute; bottom: 20%; left: 20%; }
-  .face.top .dot:nth-child(5) { position: absolute; bottom: 20%; right: 20%; }
-  .face.bottom .dot:nth-child(1) { position: absolute; top: 15%; left: 20%; }
-  .face.bottom .dot:nth-child(2) { position: absolute; top: 15%; right: 20%; }
-  .face.bottom .dot:nth-child(3) { position: absolute; bottom: 15%; left: 20%; }
-  .face.bottom .dot:nth-child(4) { position: absolute; bottom: 15%; right: 20%; }
-  .face.bottom .dot:nth-child(5) { position: absolute; top: 50%; left: 70%; transform: translate(-50%, -50%); }
-  .face.bottom .dot:nth-child(6) { position: absolute; bottom: 30%; left: 30%; transform: translate(-50%, -50%); }
-  
- /* .dice {
+
+  .front {
+    transform: rotateY(0deg) translateZ(50px);
+  }
+  .back {
+    transform: rotateY(180deg) translateZ(50px);
+  }
+  .left {
+    transform: rotateY(-90deg) translateZ(50px);
+  }
+  .right {
+    transform: rotateY(90deg) translateZ(50px);
+  }
+  .top {
+    transform: rotateX(90deg) translateZ(50px);
+  }
+  .bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+  }
+
+  .face.front .dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .face.back .dot:nth-child(1) {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+  }
+  .face.back .dot:nth-child(2) {
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+  }
+  .face.left .dot:nth-child(1) {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+  }
+  .face.left .dot:nth-child(2) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .face.left .dot:nth-child(3) {
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+  }
+  .face.right .dot:nth-child(1) {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+  }
+  .face.right .dot:nth-child(2) {
+    position: absolute;
+    top: 20%;
+    right: 20%;
+  }
+  .face.right .dot:nth-child(3) {
+    position: absolute;
+    bottom: 20%;
+    left: 20%;
+  }
+  .face.right .dot:nth-child(4) {
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+  }
+  .face.top .dot:nth-child(1) {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+  }
+  .face.top .dot:nth-child(2) {
+    position: absolute;
+    top: 20%;
+    right: 20%;
+  }
+  .face.top .dot:nth-child(3) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .face.top .dot:nth-child(4) {
+    position: absolute;
+    bottom: 20%;
+    left: 20%;
+  }
+  .face.top .dot:nth-child(5) {
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+  }
+  .face.bottom .dot:nth-child(1) {
+    position: absolute;
+    top: 15%;
+    left: 20%;
+  }
+  .face.bottom .dot:nth-child(2) {
+    position: absolute;
+    top: 15%;
+    right: 20%;
+  }
+  .face.bottom .dot:nth-child(3) {
+    position: absolute;
+    bottom: 15%;
+    left: 20%;
+  }
+  .face.bottom .dot:nth-child(4) {
+    position: absolute;
+    bottom: 15%;
+    right: 20%;
+  }
+  .face.bottom .dot:nth-child(5) {
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+  }
+  .face.bottom .dot:nth-child(6) {
+    position: absolute;
+    bottom: 30%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* .dice {
     align-items: center;
     display: grid;
     grid-gap: 2rem;
@@ -310,9 +410,9 @@ body {
     .dice {
       perspective: 1300px;
     }
-  }*/ 
+  }*/
 
-  #cover{
+  #cover {
     backdrop-filter: blur(5px);
     background: rgba(0, 0, 0, 0.5);
     z-index: 200;
@@ -326,17 +426,17 @@ body {
     top: 0;
     .loading {
       font-size: 50px;
-      font-family: 'Montserrat', sans-serif;
+      font-family: "Montserrat", sans-serif;
       font-weight: 800;
       text-align: center;
       color: #fff;
       span {
         display: inline-block;
-        margin: 0 -.05em;
+        margin: 0 -0.05em;
         animation: loading02 1.2s infinite alternate;
         @for $i from 1 through 6 {
-          &:nth-child(#{$i+1}) {
-            animation-delay: #{$i*.2}s;
+          &:nth-child(#{$i + 1}) {
+            animation-delay: #{$i * 0.2}s;
           }
         }
       }
@@ -348,30 +448,38 @@ body {
       }
       100% {
         filter: blur(5px);
-        opacity: .2;
+        opacity: 0.2;
       }
     }
   }
 
   @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   @keyframes fadeOut {
-    from {opacity: 1;}
-    to {opacity: 0;}
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
 
-  .cover_display{
+  .cover_display {
     animation: fadeIn 1s forwards;
   }
 
-  .cover_hidden{
+  .cover_hidden {
     animation: fadeOut 1s forwards;
   }
 
-  #NewGame{
+  #NewGame {
     z-index: 10;
     min-width: 130px;
     height: 40px;
@@ -387,7 +495,7 @@ body {
     border-radius: 5px;
     border: none;
     background-size: 120% auto;
-    background-image: linear-gradient(315deg, #072E1E 0%, #327D6C 75%);
+    background-image: linear-gradient(315deg, #072e1e 0%, #327d6c 75%);
     top: 40%;
     box-shadow: 0px 5px #5e706d;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -618,8 +726,6 @@ body {
     right: 0;
     width: 768px;
     height: 100%;
-    background: url(../image/bg_1.png) no-repeat;
-    background-size: cover;
     border: 0px;
     #player1 {
       top: 20%;
@@ -637,10 +743,39 @@ body {
       position: absolute;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
-     
     }
   }
-  #ScorePlayer_1{
+  .first_field_bg_display {
+    background: url(../image/bg_1.png) no-repeat;
+    background-size: cover;
+    #player1 {
+      color: #f1faee;
+    }
+  }
+
+  .second_field_bg_display {
+    background: url(../image/bg_2.png) no-repeat;
+    background-size: cover;
+    #player2 {
+      color: #f1faee;
+    }
+  }
+
+  .first_field_bg_hidden {
+    background: none;
+    #player1 {
+      color: #2b2b2b;
+    }
+  }
+
+  .second_field_bg_hidden {
+    background: none;
+    #player1 {
+      color: #2b2b2b;
+    }
+  }
+
+  #ScorePlayer_1 {
     z-index: 11;
     position: absolute;
     top: 40%;
@@ -653,8 +788,6 @@ body {
     left: 0;
     width: 768px;
     height: 100%;
-    background: url(../image/bg_2.png) no-repeat;
-    background-size: cover;
     border: 0px;
     #player2 {
       position: absolute;
@@ -673,11 +806,53 @@ body {
       left: 55%;
     }
   }
-  #ScorePlayer_2{
+  #ScorePlayer_2 {
     z-index: 11;
     position: absolute;
     top: 40%;
     left: 50%;
   }
-  
+
+  #end {
+    z-index: 200;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    .lost {
+      font-size: 50px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 800;
+      position: absolute;
+      top: 50%;
+      color: #fff;
+      Animation:focus-in-contract-bck 1s cubic-bezier(.25,.46,.45,.94) both;
+    }
+    .win {
+      font-size: 50px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 800;
+      position: absolute;
+      top: 50%;
+      color: #fff;
+      Animation:focus-in-contract-bck 1s cubic-bezier(.25,.46,.45,.94) both;
+    }
+    @keyframes focus-in-contract-bck {
+      0% {
+        letter-spacing: 1em;
+        transform: translateZ(300px);
+        filter: blur(12px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateZ(12px);
+        filter: blur(0);
+        opacity: 1;
+      }
+    }
+  }
 }
