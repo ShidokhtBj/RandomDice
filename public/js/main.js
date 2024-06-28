@@ -169,7 +169,13 @@ btn_Hold.addEventListener("click", function () {
     second_player_field.classList.remove("second_field_bg_hidden");
     randomPlayer = 2;
     if (holdSum_1 >= 30) {
-      alert("player 1 is winner");
+      document.getElementById("end").style.display="block";
+      document.getElementById("lost").style.left="20%";
+      document.getElementById("win").style.right="25%";
+      document.getElementById("resultPlayer1").style.right = "0";
+      document.getElementById("resultPlayer2").style.left = "0";
+      document.getElementById("resultPlayer1").innerHTML = `<div>` + "Player1" + `</div>` + `<span>` + "Total Score:" + `</span>` + holdSum_1 ;
+      document.getElementById("resultPlayer2").innerHTML  = `<div>` + "Player2" + `</div>` + `<span>` + "Total Score:" + `</span>` + holdSum_2 ;
     }
   } else if (randomPlayer === 2) {
     holdSum_2 = holdSum_2 + sumOfRolls_2;
@@ -184,7 +190,13 @@ btn_Hold.addEventListener("click", function () {
     second_player_field.classList.add("second_field_bg_hidden");
     randomPlayer = 1;
     if (holdSum_2 >= 30) {
-      alert("player 2 is winner");
+      document.getElementById("end").style.display="block";
+      document.getElementById("lost").style.right="20%";
+      document.getElementById("win").style.left="25%";
+      document.getElementById("resultPlayer1").style.right = "0";
+      document.getElementById("resultPlayer2").style.left = "0";
+      document.getElementById("resultPlayer1").innerHTML  = "<div>" + "Player1" + "</div>" + "<span>" + "Total Score:" + "</span>" + holdSum_1 ;
+      document.getElementById("resultPlayer2").innerHTML  = "<div>" + "Player2" + "</div>" + "<span>" + "Total Score:" + "</span>" + holdSum_2 ;
     }
   }
 });
@@ -215,4 +227,155 @@ btn_New.addEventListener("click", function () {
       cover.style.display = "none";
     }, 1000);
   }, 10000);
+});
+
+
+const canvas = document.getElementById('fireworksCanvas');
+const ctx = canvas.getContext('2d');
+let fireworks = [];
+let particles = [];
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+class Firework {
+  constructor(sx, sy, tx, ty) {
+    this.x = sx;
+    this.y = sy;
+    this.sx = sx;
+    this.sy = sy;
+    this.tx = tx;
+    this.ty = ty;
+    this.distanceToTarget = this.calculateDistance(sx, sy, tx, ty);
+    this.distanceTraveled = 0;
+    this.coordinates = [];
+    this.coordinateCount = 3;
+    while (this.coordinateCount--) {
+      this.coordinates.push([this.x, this.y]);
+    }
+    this.angle = Math.atan2(ty - sy, tx - sx);
+    this.speed = 2;
+    this.acceleration = 1.05;
+    this.brightness = Math.random() * 50 + 50;
+    this.targetRadius = 1;
+  }
+
+  calculateDistance(x1, y1, x2, y2) {
+    const xDistance = x2 - x1;
+    const yDistance = y2 - y1;
+    return Math.sqrt(xDistance * xDistance + yDistance * yDistance);
+  }
+
+  update(index) {
+    this.coordinates.pop();
+    this.coordinates.unshift([this.x, this.y]);
+    if (this.targetRadius < 8) {
+      this.targetRadius += 0.3;
+    } else {
+      this.targetRadius = 1;
+    }
+    this.speed *= this.acceleration;
+    const vx = Math.cos(this.angle) * this.speed;
+    const vy = Math.sin(this.angle) * this.speed;
+    this.distanceTraveled = this.calculateDistance(this.sx, this.sy, this.x + vx, this.y + vy);
+    if (this.distanceTraveled >= this.distanceToTarget) {
+      createParticles(this.tx, this.ty);
+      fireworks.splice(index, 1);
+    } else {
+      this.x += vx;
+      this.y += vy;
+    }
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+    ctx.lineTo(this.x, this.y);
+    ctx.strokeStyle = `hsl(${Math.random() * 360}, 100%, ${this.brightness}%)`;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(this.tx, this.ty, this.targetRadius, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+}
+
+class Particle {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.coordinates = [];
+    this.coordinateCount = 5;
+    while (this.coordinateCount--) {
+      this.coordinates.push([this.x, this.y]);
+    }
+    this.angle = Math.random() * Math.PI * 2;
+    this.speed = Math.random() * 10 + 1;
+    this.friction = 0.95;
+    this.gravity = 1;
+    this.hue = Math.random() * 360;
+    this.brightness = Math.random() * 80 + 20;
+    this.alpha = 1;
+    this.decay = Math.random() * 0.03 + 0.015;
+  }
+
+  update(index) {
+    this.coordinates.pop();
+    this.coordinates.unshift([this.x, this.y]);
+    this.speed *= this.friction;
+    this.x += Math.cos(this.angle) * this.speed;
+    this.y += Math.sin(this.angle) * this.speed + this.gravity;
+    this.alpha -= this.decay;
+    if (this.alpha <= this.decay) {
+      particles.splice(index, 1);
+    }
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+    ctx.lineTo(this.x, this.y);
+    ctx.strokeStyle = `hsla(${this.hue}, 100%, ${this.brightness}%, ${this.alpha})`;
+    ctx.stroke();
+  }
+}
+
+function createParticles(x, y) {
+  let particleCount = 30;
+  while (particleCount--) {
+    particles.push(new Particle(x, y));
+  }
+}
+
+function loop() {
+  requestAnimationFrame(loop);
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.globalCompositeOperation = 'lighter';
+  let i = fireworks.length;
+  while (i--) {
+    fireworks[i].draw();
+    fireworks[i].update(i);
+  }
+  let j = particles.length;
+  while (j--) {
+    particles[j].draw();
+    particles[j].update(j);
+  }
+}
+
+function launchFirework() {
+  const sx = canvas.width / 2;
+  const sy = canvas.height;
+  const tx = Math.random() * (canvas.width / 2) + canvas.width / 4;
+  const ty = Math.random() * (canvas.height / 2);
+  fireworks.push(new Firework(sx, sy, tx, ty));
+}
+
+window.onload = loop;
+setInterval(launchFirework, 1000); // Launch a firework every second
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 });
