@@ -644,9 +644,10 @@ body {
     backdrop-filter: blur(5px);
     background: rgba(0, 0, 0, 0.5);
     animation: fadeIn 1s forwards;
+    overflow: hidden;
     #result{
       width: 80%;
-      background-color: #004e92;
+      height: 100px;
       font-size: 30px;
       font-family: "Montserrat", sans-serif;
       font-weight: 800;
@@ -661,23 +662,33 @@ body {
       #resultPlayer1 , #resultPlayer2{
         position: absolute;
         width: 50%;
-        text-align: center;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        
-        div{
-          display: block;
-          line-height: 100px;
-          font-size: 35px;
-        }
-        span{
-          display: block;
-          line-height: 100px;
-          font-size: 25px;
-        }
+        white-space: pre-wrap;
+        text-align: center;
       }
+      #Player1counter{
+        display: none;
+        opacity: 0;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        top: 80%;
+        left: 73%;
+        }
+        #Player2counter{
+          display: none;
+          opacity: 0;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          position: relative;
+          top: 80%;
+          right: 74%;
+          }
     }
     #fireworksCanvas{
       display: block;
@@ -688,8 +699,10 @@ body {
       font-weight: 800;
       position: absolute;
       top: 50%;
-      color: #fff;
+      color: #010847;
       Animation:focus-in-contract-bck 1s cubic-bezier(.25,.46,.45,.94) both;
+      display: none;
+      opacity: 0;
     }
     #win {
       font-size: 50px;
@@ -697,8 +710,10 @@ body {
       font-weight: 800;
       position: absolute;
       top: 50%;
-      color: #fff;
+      color: #14741b;
       Animation:focus-in-contract-bck 1s cubic-bezier(.25,.46,.45,.94) both;
+      display: none;
+      opacity: 0;
     }
     @keyframes focus-in-contract-bck {
       0% {
